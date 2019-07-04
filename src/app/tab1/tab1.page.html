@@ -1,41 +1,66 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Tab One
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-menu side="end">
+    <ion-header>
+        <ion-toolbar translucent>
+            <ion-title>ELIGE UN DIA</ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <ion-content>
+        <ion-list>
+            <ion-item *ngFor="let dia of dias">
+                <ion-label (click)="cargarTareasManana(dia.iddia)" style="text-transform: capitalize">{{dia.dia}}</ion-label>
+                <ion-img src="../../../assets/img/{{ dia.dia }}.png"></ion-img>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-menu>
 
-<ion-content>
-    <ion-card class="welcome-card">
-      <ion-img src="/assets/shapes.svg"></ion-img>
-      <ion-card-header>
-        <ion-card-subtitle>Get Started</ion-card-subtitle>
-        <ion-card-title>Welcome to Ionic</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <p>Now that your app has been created, you'll want to start building out features and components. Check out some of the resources below for next steps.</p>
-      </ion-card-content>
-    </ion-card>
-    <ion-list lines="none">
-      <ion-list-header>
-        <ion-label>Resources</ion-label>
-      </ion-list-header>
-      <ion-item href="https://ionicframework.com/docs/">
-        <ion-icon slot="start" color="medium" name="book"></ion-icon>
-        <ion-label>Ionic Documentation</ion-label>
-      </ion-item>
-      <ion-item href="https://ionicframework.com/docs/building/scaffolding">
-        <ion-icon slot="start" color="medium" name="build"></ion-icon>
-        <ion-label>Scaffold Out Your App</ion-label>
-      </ion-item>
-      <ion-item href="https://ionicframework.com/docs/layout/structure">
-        <ion-icon slot="start" color="medium" name="grid"></ion-icon>
-        <ion-label>Change Your App Layout</ion-label>
-      </ion-item>
-      <ion-item href="https://ionicframework.com/docs/theming/basics">
-        <ion-icon slot="start" color="medium" name="color-fill"></ion-icon>
-        <ion-label>Theme Your App</ion-label>
-      </ion-item>
-    </ion-list>
-</ion-content>
+<div class="ion-page" main>
+    <ion-header>
+        <ion-toolbar>
+            <ion-title>TUS TAREAS DE LA MAÑANA</ion-title>
+            <ion-buttons slot="end">
+                <ion-menu-button></ion-menu-button>
+            </ion-buttons>
+        </ion-toolbar>
+    </ion-header>
+
+    <script>
+        function openMenu() {
+            document.querySelector('ion-menu-controller')
+                .open();
+        }
+    </script>
+
+    <ion-content>
+        <div class="part line">
+            <ion-grid>
+                <ion-row>
+                    <ion-col *ngFor="let tarea of tareas">
+                        <div class="card align-items-center animated fadeIn" (click)="marcarPendiente(tarea.id, tarea.estado)">
+                            <span *ngIf="tarea.estado!=='completada'" class="badge badge-pill badge-primary w-75">{{tarea.orden}}</span>
+                            <span *ngIf="tarea.estado==='completada'" class="badge badge-success badge-primary w-75">{{tarea.orden}}</span>
+                            <img src="{{tarea.pictoColor}}" class="card-img-top img-pictograma-peq" alt="Sin pictograma">
+                            <h5 style="font-size:12px; font-weight: 600" class="card-title">{{tarea.nombre}}</h5>
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+        <hr>
+        <div class="part">
+            <ion-title>TAREAS PENDIENTES</ion-title>
+            <div class="text-center align-items-center" *ngFor="let tareap of tareas; let i = index">
+                <ion-card class="card big-card text-center align-items-center animated fadeIn" *ngIf="tareap.estado === 'pendiente'" (swipe)="completar(tareap.id)">
+                    <img src="{{tareap.pictoColor}}" class="img-pictograma" alt="Sin pictograma" />
+                    <ion-card-header>
+                        <ion-card-title>{{tareap.nombre}}</ion-card-title>
+                        <ion-card-subtitle>{{tareap.horaInicio}}</ion-card-subtitle>
+                    </ion-card-header>
+                    <p>
+                        Desliza hacia algún lado para completar esta tarea
+                    </p>
+                </ion-card>
+            </div>
+        </div>
+
+    </ion-content>

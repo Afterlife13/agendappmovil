@@ -1,5 +1,7 @@
 {
   "name": "agendappmovil",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

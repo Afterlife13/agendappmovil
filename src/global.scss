@@ -9,3 +9,38 @@
 @import '~@ionic/angular/css/text-alignment.css';
 @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
+
+/* CARDS TAREAS */
+
+.part {
+    height: 40vh;
+}
+
+.line {
+    border-bottom: 2px solid rgb(0, 0, 0);
+}
+
+.card {
+    width: 75px;
+    height: 110px;
+}
+
+.big-card {
+    width: 200px;
+    height: 300px;
+}
+
+.img-pictograma {
+    max-width: 150px;
+    max-height: 150px;
+}
+
+.img-pictograma-peq {
+    max-width: 50px;
+    max-height: 50px;
+}
+
+.no-margin {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
