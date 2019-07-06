@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TareasService } from '../services/tareas.service';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab2',
@@ -13,17 +14,21 @@ export class Tab2Page implements OnInit {
   dias: any = [];
   idnino: number;
   dia: number;
+  token: number;
   fecha: Date = new Date();
 
-  constructor(private tareasService: TareasService) {}
+  constructor(private tareasService: TareasService, private router: Router) {}
 
   ngOnInit() {
+    if ( localStorage.getItem('tokenNino') ) {
+      this.token = +localStorage.getItem('tokenNino');
+    }
     if (this.fecha.getDay() === 0) {
       this.dia = 6;
     } else {
     this.dia = (this.fecha.getDay() - 1);
     }
-    this.tareasService.getDiasActiva(19).subscribe(
+    this.tareasService.getDiasActiva(this.token).subscribe(
       resp => {
         this.dias = resp;
         this.tareasService.getTareasTarde(this.dias[this.dia].iddia).subscribe(
@@ -90,6 +95,11 @@ cargarTareasTarde(id: number) {
       this.tareas = resp;
     });
 }
+
+logout() {
+  localStorage.removeItem('tokenNino');
+  this.router.navigateByUrl('');
+  }
 
 sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));

@@ -10,6 +10,9 @@
                 <ion-label (click)="cargarTareasManana(dia.iddia)" style="text-transform: capitalize">{{dia.dia}}</ion-label>
                 <ion-img src="../../../assets/img/{{ dia.dia }}.png"></ion-img>
             </ion-item>
+            <ion-item>
+                <ion-label (click)="logout()">CERRAR SESIÓN</ion-label>
+            </ion-item>
         </ion-list>
     </ion-content>
 </ion-menu>

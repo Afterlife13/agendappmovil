@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
+import { NinoModel } from '../login/nino.model';
+import { NgForm } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +10,6 @@ import { HttpClient } from '@angular/common/http';
 export class TareasService {
 
   private url = 'https://agendapp-apirest.herokuapp.com/api';
-
   constructor(private http: HttpClient) { }
 
   // Obtener dias de agenda activa para un idnino
@@ -36,4 +38,23 @@ export class TareasService {
     return this.http.get(`${this.url}/tareas/marcarpendiente/${id}`);
   }
 
+  login(nino: NinoModel) {
+    const authData = {
+      ...nino
+    };
+
+    return this.http.post(
+      `${ this.url }/auth/loginapp`, authData
+      ).pipe(
+      map( resp => {
+        // tslint:disable-next-line:no-string-literal
+        this.guardarToken(resp['token']);
+        return resp;
+      })
+    );
+  }
+
+  private guardarToken( token: string) {
+    localStorage.setItem('tokenNino', token);
+  }
 }

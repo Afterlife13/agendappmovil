@@ -1,0 +1,35 @@
+<div class="limiter animated fadeInLeft">
+    <div class="container-login100">
+        <div class="wrap-login100 pt-5 pb-5">
+
+            <form (ngSubmit)="login(loginForm)" #loginForm="ngForm" class="login100-form validate-form flex-sb flex-w">
+
+                <span class="login100-form-title pt-5">
+                          BIENVENIDO A AGENDAPP
+              <img src='http://s2.subirimagenes.com/otros/previo/thump_9899571agendapogoblanco.jpg' alt='Logo Agendapp'>
+              </span>
+
+                <span class="login100-form-subtitle pb-5">
+                  Accede con tus datos
+              </span>
+
+                <span *ngIf="loginForm.submitted && loginForm.controls['nick'].errors" class="text-danger animated fadeIn">Introduce tu nombre de usuario</span>
+                <div class="wrap-input100-3 mb-4">
+                    <input class="input100" type="text" name="nick" [(ngModel)]="nino.nick" required placeholder="Nombre de usuario">
+
+                    <span class="focus-input100"></span>
+                </div>
+
+
+                <span *ngIf="loginForm.submitted && loginForm.controls['pin'].errors" class="text-danger animated fadeIn">Introduce tu pin de 4 dígitos</span>
+                <div class="wrap-input100-3 mb-4">
+                    <input class="input100" type="pin" name="pin" [(ngModel)]="nino.pin" required minlength="4" maxlength="4" placeholder="Contraseña">
+                    <span class="focus-input100"></span>
+                </div>
+
+                <div class="container-login100-form-btn mt-4">
+                    <button class="login100-form-btn" type="submit">
+                      Entrar
+                  </button>
+                </div>
+            </form>

@@ -3,11 +3,12 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
 
-  { path: '', loadChildren: './tabs/tabs.module#TabsPageModule' }
+  { path: 'tabs', loadChildren: './tabs/tabs.module#TabsPageModule' },
+  { path: '', loadChildren: './login/login.module#LoginPageModule' }
 ];
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, { useHash: true })
   ],
   exports: [RouterModule]
 })
