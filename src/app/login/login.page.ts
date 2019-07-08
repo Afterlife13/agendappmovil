@@ -13,11 +13,18 @@ import { NinoModel } from './nino.model';
 export class LoginPage implements OnInit {
 
 nino: NinoModel = new NinoModel();
+fecha: Date = new Date();
 
   constructor(private router: Router, private tareasService: TareasService) {
    }
 
   ngOnInit() {
+    if (this.fecha.getDay() === 0) {
+      localStorage.setItem('dia', String(6));
+    } else {
+      localStorage.setItem('dia', String(this.fecha.getDay() - 1));
+      }
+
     if ( localStorage.getItem('tokenNino') ) {
       this.router.navigateByUrl('/tabs');
     }

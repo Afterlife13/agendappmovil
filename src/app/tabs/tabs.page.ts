@@ -1,5 +1,6 @@
 import { Component} from '@angular/core';
 import { Router } from '@angular/router';
+import { TareasService } from '../services/tareas.service';
 
 @Component({
   selector: 'app-tabs',
@@ -8,12 +9,10 @@ import { Router } from '@angular/router';
 })
 export class TabsPage {
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private tareasService: TareasService) {
     if ( !localStorage.getItem('tokenNino') ) {
       this.router.navigateByUrl('');
-    } else {
-      console.log(localStorage.getItem('tokenNino'));
-    }
+    } else {}
   }
 
 }

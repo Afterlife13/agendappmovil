@@ -5,15 +5,12 @@
         </ion-toolbar>
     </ion-header>
     <ion-content>
-        <ion-list>
-            <ion-item *ngFor="let dia of dias">
-                <ion-label (click)="cargarTareasManana(dia.iddia)" style="text-transform: capitalize">{{dia.dia}}</ion-label>
-                <ion-img src="../../../assets/img/{{ dia.dia }}.png"></ion-img>
-            </ion-item>
-            <ion-item>
-                <ion-label (click)="logout()">CERRAR SESIÓN</ion-label>
-            </ion-item>
-        </ion-list>
+    <ion-list>
+      <ion-item *ngFor="let dia of dias">
+        <ion-label (click)="cargarTareasManana(dia.iddia)">{{dia.dia}}</ion-label>
+        <ion-img src="../../../assets/img/{{ dia.dia }}.png"></ion-img>
+      </ion-item>
+    </ion-list>
     </ion-content>
 </ion-menu>
 
@@ -26,11 +23,9 @@
             </ion-buttons>
         </ion-toolbar>
     </ion-header>
-
     <script>
         function openMenu() {
-            document.querySelector('ion-menu-controller')
-                .open();
+            document.querySelector('ion-menu-controller').open();
         }
     </script>
 
@@ -39,9 +34,12 @@
             <ion-grid>
                 <ion-row>
                     <ion-col *ngFor="let tarea of tareas">
-                        <div class="card align-items-center animated fadeIn" (click)="marcarPendiente(tarea.id, tarea.estado)">
-                            <span *ngIf="tarea.estado!=='completada'" class="badge badge-pill badge-primary w-75">{{tarea.orden}}</span>
-                            <span *ngIf="tarea.estado==='completada'" class="badge badge-success badge-primary w-75">{{tarea.orden}}</span>
+                        <div class="card align-items-center animated fadeIn" 
+						(click)="marcarPendiente(tarea.id, tarea.estado)">
+                            <span *ngIf="tarea.estado!=='completada'" 
+							class="badge badge-pill badge-primary w-75">{{tarea.orden}}</span>
+                            <span *ngIf="tarea.estado==='completada'" 
+							class="badge badge-success badge-primary w-75">{{tarea.orden}}</span>
                             <img src="{{tarea.pictoColor}}" class="card-img-top img-pictograma-peq" alt="Sin pictograma">
                             <h5 style="font-size:12px; font-weight: 600" class="card-title">{{tarea.nombre}}</h5>
                         </div>
@@ -53,15 +51,14 @@
         <div class="part">
             <ion-title>TAREAS PENDIENTES</ion-title>
             <div class="text-center align-items-center" *ngFor="let tareap of tareas; let i = index">
-                <ion-card class="card big-card text-center align-items-center animated fadeIn" *ngIf="tareap.estado === 'pendiente'" (swipe)="completar(tareap.id)">
+                <ion-card class="card big-card text-center align-items-center animated fadeIn" 
+				*ngIf="tareap.estado === 'pendiente'" (swipe)="completar(tareap.id)">
                     <img src="{{tareap.pictoColor}}" class="img-pictograma" alt="Sin pictograma" />
                     <ion-card-header>
                         <ion-card-title>{{tareap.nombre}}</ion-card-title>
                         <ion-card-subtitle>{{tareap.horaInicio}}</ion-card-subtitle>
                     </ion-card-header>
-                    <p>
-                        Desliza hacia algún lado para completar esta tarea
-                    </p>
+                    <p>Desliza hacia algún lado para completar esta tarea</p>
                 </ion-card>
             </div>
         </div>

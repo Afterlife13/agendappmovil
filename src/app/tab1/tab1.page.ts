@@ -41,6 +41,9 @@ export class Tab1Page implements OnInit {
     );
   }
 
+
+
+
   async completar(id: number) {
 
   Swal.fire({

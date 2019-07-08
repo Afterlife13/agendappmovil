@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TareasService } from '../services/tareas.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab3',
@@ -17,16 +18,20 @@ export class Tab3Page implements OnInit {
   token: number;
   fecha: Date = new Date();
 
-  constructor(private tareasService: TareasService, private router: Router) {}
+  constructor(private tareasService: TareasService, private router: Router, private menu: MenuController) {}
   ngOnInit() {
+
     if ( localStorage.getItem('tokenNino') ) {
       this.token = +localStorage.getItem('tokenNino');
     }
-    if (this.fecha.getDay() === 0) {
-      this.dia = 6;
-    } else {
-    this.dia = (this.fecha.getDay() - 1);
+  }
+
+  ionViewWillEnter() {
+    if ( localStorage.getItem('dia') ) {
+      this.dia = +localStorage.getItem('dia');
     }
+
+    this.tareas = [];
     this.tareasService.getDiasActiva(this.token).subscribe(
       resp => {
         this.dias = resp;
@@ -56,7 +61,7 @@ export class Tab3Page implements OnInit {
       });
 
     await this.sleep(1500);
-    window.location.reload();
+    this.ionViewWillEnter();
   });
 
 }
@@ -78,7 +83,7 @@ async marcarPendiente(id: number, estado: string) {
     if ( resp.value ) {
       this.tareasService.marcarPendiente(id).subscribe( async resp2 => {
         await this.sleep(1500);
-        window.location.reload();
+        this.ionViewWillEnter();
       });
     }
   });
@@ -87,8 +92,7 @@ async marcarPendiente(id: number, estado: string) {
 
 cargarTareasNoche(id: number) {
   this.tareas = [];
-  document.querySelector('ion-menu-controller')
-  .close();
+  this.menu.close();
   this.tareasService.getTareasNoche(id).subscribe(
     resp => {
       this.tareas = resp;

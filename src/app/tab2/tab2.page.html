@@ -1,4 +1,5 @@
-<ion-menu side="end">
+<!--
+<ion-menu side="end" menuId="tarde">
     <ion-header>
         <ion-toolbar translucent>
             <ion-title>ELIGE UN DIA</ion-title>
@@ -10,26 +11,25 @@
                 <ion-label (click)="cargarTareasTarde(dia.iddia)" style="text-transform: capitalize">{{dia.dia}}</ion-label>
                 <ion-img src="../../../assets/img/{{ dia.dia }}.png"></ion-img>
             </ion-item>
+            <ion-item>
+                <ion-label (click)="logout()">CERRAR SESIÓN</ion-label>
+            </ion-item>
         </ion-list>
     </ion-content>
 </ion-menu>
+-->
 
 <div class="ion-page" main>
     <ion-header>
         <ion-toolbar>
-            <ion-title>TUS TAREAS DE LA TARDE</ion-title>
+            <ion-title>TAREAS DE LA TARDE</ion-title>
+            <!--
             <ion-buttons slot="end">
                 <ion-menu-button></ion-menu-button>
             </ion-buttons>
+            -->
         </ion-toolbar>
     </ion-header>
-
-    <script>
-        function openMenu() {
-            document.querySelector('ion-menu-controller')
-                .open();
-        }
-    </script>
 
     <ion-content>
         <div class="part line">
