@@ -12,6 +12,7 @@ import { NinoModel } from './nino.model';
 })
 export class LoginPage implements OnInit {
 
+mostrarAbout = false;
 nino: NinoModel = new NinoModel();
 fecha: Date = new Date();
 
